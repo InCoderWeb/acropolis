@@ -30,7 +30,7 @@ const newDataSchema = Y.object({
     linkD: Y.string().required("Please enter link."),
 })
 
-const page = () => {
+const Page = () => {
     const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
         initialValues,
         validationSchema: newDataSchema,
@@ -109,4 +109,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
