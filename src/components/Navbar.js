@@ -32,7 +32,7 @@ export default function Navbar() {
       <div className="items-center bg-white md:bg-transparent justify-between px-4 max-w-screen-xl mx-auto md:flex md:px-8">
         <div className="flex items-center justify-between py-3 md:py-5 md:block">
           <Link href="/" className="flex items-center">
-            <img src={"/images/acrologo.png"} alt="Logo" className="h-[3.5rem] mr-1" />
+            <img src={"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjCluzF0Jb6hRWUW1jcRAvIvCwawoIQef8xjjcEy-WUYRb0EX_UWqzQcE1lFI2HJBzj3y5DNNUkvCODYoWQjQ1MQCtm8JlELaalroGXtC9R0INLGKlyU3NxsC_xVmREEo_bKINxmUcDeK8yBtZx2-ZL_cn8iiidWiYHxvKR25mJtiLGD88QM2mFm-iQUMvC/s1600/acrologo.png"} alt="Logo" className="h-[3.5rem] mr-1" />
             <h1 className="text-3xl font-bold text-blue-700 hover:text-blue-900">
                 Acropolis
             </h1>
