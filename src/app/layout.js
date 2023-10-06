@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify'
 import "react-toastify/ReactToastify.min.css"
 import AuthProvider from '@/components/AuthProvider'
 import Protected from '@/components/Protected'
+import NextTopLoader from 'nextjs-toploader'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,6 +17,8 @@ export default function RootLayout({ children }) {
   return (
   <html lang="en">
     <body className={inter.className}>
+      <ToastContainer />
+      <NextTopLoader color="#1d4ed8" showSpinner={false} />
       <AuthProvider>
         <Protected>
           <ToastContainer />

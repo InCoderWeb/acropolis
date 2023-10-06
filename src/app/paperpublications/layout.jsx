@@ -2,11 +2,11 @@ import NextTopLoader from 'nextjs-toploader';
 import { ToastContainer } from 'react-toastify';
 
 export const metadata = {
-    title: 'Sign in | Acropolis FCA',
+    title: 'Paper Publications | Acropolis FCA',
     description: 'InCoder Web',
 }
 
-const SignInLayout = ({children}) => {
+const PaperPublicationsLayout = ({children}) => {
   return (
     <>
       <ToastContainer />
@@ -16,4 +16,4 @@ const SignInLayout = ({children}) => {
   );
 };
 
-export default SignInLayout;
+export default PaperPublicationsLayout;
