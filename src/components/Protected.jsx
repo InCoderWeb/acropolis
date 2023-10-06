@@ -5,7 +5,6 @@ import { redirect, usePathname } from "next/navigation"
 const Protected = ({children}) => {
     const { status } = useSession();
     const path = usePathname();
-    console.log(status);
     if(status == "authenticated"){
         return <>{children}</>;
     } else if(status == "unauthenticated"){

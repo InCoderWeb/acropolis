@@ -45,7 +45,7 @@ const Page = () => {
   })
   return (
     <>
-      <div className="aitr_SignInBox" style={{ backgroundImage: "url(/Images/loginbg.jpg)", backgroundPosition: "center", objectFit: "cover", backgroundSize: "cover" }}>
+      <div className="aitr_SignInBox" style={{ backgroundImage: "url(/Images/acropolis.jpg)", backgroundPosition: "center", objectFit: "cover", backgroundSize: "cover" }}>
         <div className="aitr_SignInFormWrapper">
           <div className="aitr_SignInForm">
             <form onSubmit={handleSubmit}>
@@ -63,7 +63,7 @@ const Page = () => {
                       </div>
                       <div className="flex flex-col space-y-1.5">
                         <Label htmlFor="password">Password</Label>
-                        <Input id="password" name="password" values={values.password} onChange={handleChange} onBlur={handleBlur} placeholder="********" className="aitr_input" />
+                        <Input id="password" name="password" type="password" values={values.password} onChange={handleChange} onBlur={handleBlur} placeholder="********" className="aitr_input" />
                         <p className="aitr_error">{errors.password}</p>
                       </div>
                       <div className="flex">
