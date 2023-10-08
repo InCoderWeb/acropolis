@@ -13,6 +13,8 @@ import {
 } from "@/components/ui/dialog"
 import { useFormik } from "formik"
 import * as Y from "yup"
+import axios from 'axios';
+import { toast } from 'react-toastify';
   
 const initialValues = {
     nameOfFaculty: "",
@@ -35,7 +37,13 @@ const Page = () => {
         initialValues,
         validationSchema: newDataSchema,
         onSubmit: (values) => {
-            console.log(132);
+            axios.post('/api/paperpublications', values).then(function (response) {
+                console.log(response);
+                toast.success(response.data.message)
+            }).catch(function (error) {
+                console.log(error);
+                toast.error(error.response.data.message)
+            });
         }
     })
   return (
@@ -49,58 +57,58 @@ const Page = () => {
                         <Input placeholder="Search here..." className="w-full" />
                     </div>
                     <div className="right w-full sm:w-auto mt-2 sm:mt-0">
-                        <form onSubmit={handleSubmit}>
                             <Dialog>
                                 <DialogTrigger><Button className="w-full">Add New Data</Button></DialogTrigger>
                                 <DialogContent>
                                     <DialogHeader>
                                     <DialogTitle className="text-[1.5rem]">Add New Data</DialogTitle>
                                     </DialogHeader>
-                                    <div className="grid w-full items-center gap-4 h-[20rem] overflow-y-auto">
-                                        <div className="flex flex-col space-y-1.5">
-                                            <Label htmlFor="nameOfFaculty">Name of Faculty</Label>
-                                            <div className="rounded-xl border-2">
-                                                <Input placeholder="Ajay Sir"
-                                                name="nameOfFaculty" id="nameOfFaculty" values={values.nameOfFaculty} onChange={handleChange} onBlur={handleBlur} className="!border border-gray-600" />
+                                        <form onSubmit={handleSubmit}>
+                                            <div className="grid w-full items-center gap-4 h-[20rem] overflow-y-auto">
+                                                <div className="flex flex-col space-y-1.5">
+                                                    <Label htmlFor="nameOfFaculty">Name of Faculty</Label>
+                                                    <div className="rounded-xl border-2">
+                                                        <Input placeholder="Ajay Sir"
+                                                        name="nameOfFaculty" id="nameOfFaculty" values={values.nameOfFaculty} onChange={handleChange} onBlur={handleBlur} className="!border border-gray-600" />
+                                                    </div>
+                                                    <p className="aitr_error">{errors.nameOfFaculty}</p>
+                                                </div>
+                                                <div className="flex flex-col space-y-1.5">
+                                                    <Label htmlFor="stream">Stream</Label>
+                                                    <div className="rounded-xl border-2">
+                                                        <Input placeholder="B.Tech/M.Tech" values={values.stream} onChange={handleChange} onBlur={handleBlur} 
+                                                        name="stream" id="stream" className="!border border-gray-600" />
+                                                    </div>
+                                                    <p className="aitr_error">{errors.stream}</p>
+                                                </div>
+                                                <div className="flex flex-col space-y-1.5">
+                                                    <Label htmlFor="topic">Topic</Label>
+                                                    <div className="rounded-xl border-2">
+                                                        <Input placeholder="Enter Topic" values={values.topic} onChange={handleChange} onBlur={handleBlur} name="topic" id="topic" className="!border border-gray-600" />
+                                                    </div>
+                                                    <p className="aitr_error">{errors.topic}</p>
+                                                </div>
+                                                <div className="flex flex-col space-y-1.5">
+                                                    <Label htmlFor="issnNo">ISSN No.</Label>
+                                                    <div className="rounded-xl border-2">
+                                                        <Input placeholder="Enter ISSN No." values={values.issnNo} onChange={handleChange} onBlur={handleBlur}  name="issnNo" id="issnNo" className="!border border-gray-600" />
+                                                    </div>
+                                                    <p className="aitr_error">{errors.issnNo}</p>
+                                                </div>
+                                                <div className="flex flex-col space-y-1.5">
+                                                    <Label htmlFor="linkD">Link</Label>
+                                                    <div className="rounded-xl border-2">
+                                                        <Input placeholder="Enter Link" values={values.linkD} onChange={handleChange} onBlur={handleBlur} name="linkD" id="linkD" className="!border border-gray-600" />
+                                                    </div>
+                                                    <p className="aitr_error">{errors.linkD}</p>
+                                                </div>
                                             </div>
-                                            <p className="aitr_error">{errors.nameOfFaculty}</p>
-                                        </div>
-                                        <div className="flex flex-col space-y-1.5">
-                                            <Label htmlFor="stream">Stream</Label>
-                                            <div className="rounded-xl border-2">
-                                                <Input placeholder="B.Tech/M.Tech" values={values.stream} onChange={handleChange} onBlur={handleBlur} 
-                                                name="stream" id="stream" className="!border border-gray-600" />
-                                            </div>
-                                            <p className="aitr_error">{errors.stream}</p>
-                                        </div>
-                                        <div className="flex flex-col space-y-1.5">
-                                            <Label htmlFor="topic">Topic</Label>
-                                            <div className="rounded-xl border-2">
-                                                <Input placeholder="Enter Topic" values={values.topic} onChange={handleChange} onBlur={handleBlur} name="topic" id="topic" className="!border border-gray-600" />
-                                            </div>
-                                            <p className="aitr_error">{errors.topic}</p>
-                                        </div>
-                                        <div className="flex flex-col space-y-1.5">
-                                            <Label htmlFor="issnNo">ISSN No.</Label>
-                                            <div className="rounded-xl border-2">
-                                                <Input placeholder="Enter ISSN No." values={values.issnNo} onChange={handleChange} onBlur={handleBlur}  name="issnNo" id="issnNo" className="!border border-gray-600" />
-                                            </div>
-                                            <p className="aitr_error">{errors.issnNo}</p>
-                                        </div>
-                                        <div className="flex flex-col space-y-1.5">
-                                            <Label htmlFor="linkD">Link</Label>
-                                            <div className="rounded-xl border-2">
-                                                <Input placeholder="Enter Link" values={values.linkD} onChange={handleChange} onBlur={handleBlur} name="linkD" id="linkD" className="!border border-gray-600" />
-                                            </div>
-                                            <p className="aitr_error">{errors.linkD}</p>
-                                        </div>
-                                    </div>
-                                    <Button type="submit" className="w-full">
-                                        Submit
-                                    </Button>
+                                            <Button type="submit" className="w-full">
+                                                Submit
+                                            </Button>
+                                        </form>
                                 </DialogContent>
                             </Dialog>
-                        </form>
                     </div>
                 </div>
             </div>
