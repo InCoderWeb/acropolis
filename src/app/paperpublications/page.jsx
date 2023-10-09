@@ -3,7 +3,7 @@ import Navbar from '@/components/Navbar'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from "@/components/ui/label"
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Dialog,
     DialogContent,
@@ -11,6 +11,15 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
 import { useFormik } from "formik"
 import * as Y from "yup"
 import axios from 'axios';
@@ -25,7 +34,7 @@ const initialValues = {
 }
 
 const newDataSchema = Y.object({
-    nameOfFaculty: Y.string().min(2).max(50).required("Please enter the name of faculty."),
+    nameOfFaculty: Y.string().min(2).max(50).required("Please select the name of faculty."),
     stream: Y.string().min(2).max(50).required("Please enter stream."),
     topic: Y.string().min(2).max(50).required("Please enter topic."),
     issnNo: Y.string().min(2).max(50).required("Please enter ISSN number."),
@@ -33,6 +42,27 @@ const newDataSchema = Y.object({
 })
 
 const Page = () => {
+    const [facultyData, setFacultyData] = useState([])
+    const fcaData = facultyData.filter((d) => {
+        return d.faculty.department == "fca"
+    })
+    const csData = facultyData.filter((d) => {
+        return d.faculty.department == "cs"
+    })
+    const itData = facultyData.filter((d) => {
+        return d.faculty.department == "cs"
+    })
+    console.log(fcaData, csData, itData);
+
+    useEffect(() => {
+        axios.get('/api/faculties').then(function (response) {
+            console.log(response.data.facultyData);
+            setFacultyData(response.data.facultyData);
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }, [])
+
     const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
         initialValues,
         validationSchema: newDataSchema,
@@ -68,8 +98,52 @@ const Page = () => {
                                                 <div className="flex flex-col space-y-1.5">
                                                     <Label htmlFor="nameOfFaculty">Name of Faculty</Label>
                                                     <div className="rounded-xl border-2">
-                                                        <Input placeholder="Ajay Sir"
-                                                        name="nameOfFaculty" id="nameOfFaculty" values={values.nameOfFaculty} onChange={handleChange} onBlur={handleBlur} className="!border border-gray-600" />
+                                                        <Select value={values.nameOfFaculty} onValueChange={selectedOption => {
+                                                            let event = {target: {name: 'nameOfFaculty', value: selectedOption}}
+                                                            handleChange(event)
+                                                        }}
+                                                        onBlur={() => {
+                                                            handleBlur({target: {name: 'nameOfFaculty'}});
+                                                        }} name='nameOfFaculty'>
+                                                            <SelectTrigger className="w-full">
+                                                                <SelectValue placeholder="Select Faculty Name" />
+                                                            </SelectTrigger>
+                                                            <SelectContent>
+                                                                <SelectGroup>
+                                                                    <SelectLabel>FCA</SelectLabel>
+                                                                    {
+                                                                        fcaData.map((d,i) => {
+                                                                            return (
+                                                                                <SelectItem key={i} value=
+                                                                                {d.faculty.name}>{d.faculty.name}</SelectItem>
+                                                                            )
+                                                                        })
+                                                                    }
+                                                                </SelectGroup>
+                                                                <SelectGroup>
+                                                                    <SelectLabel>CS</SelectLabel>
+                                                                    {
+                                                                        csData.map((d,i) => {
+                                                                            return (
+                                                                                <SelectItem key={i} value=
+                                                                                {d.faculty.name}>{d.faculty.name}</SelectItem>
+                                                                            )
+                                                                        })
+                                                                    }
+                                                                </SelectGroup>
+                                                                <SelectGroup>
+                                                                    <SelectLabel>IT</SelectLabel>
+                                                                    {
+                                                                        itData.map((d,i) => {
+                                                                            return (
+                                                                                <SelectItem key={i} value=
+                                                                                {d.faculty.name}>{d.faculty.name}</SelectItem>
+                                                                            )
+                                                                        })
+                                                                    }
+                                                                </SelectGroup>
+                                                            </SelectContent>
+                                                        </Select>
                                                     </div>
                                                     <p className="aitr_error">{errors.nameOfFaculty}</p>
                                                 </div>
