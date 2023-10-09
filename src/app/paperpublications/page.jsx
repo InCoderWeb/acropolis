@@ -50,7 +50,7 @@ const Page = () => {
         return d.faculty.department == "cs"
     })
     const itData = facultyData.filter((d) => {
-        return d.faculty.department == "cs"
+        return d.faculty.department == "it"
     })
     console.log(fcaData, csData, itData);
 
