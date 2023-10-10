@@ -90,3 +90,12 @@
 .aitr_error{
   @apply text-red-800
 }
+
+.aitrTable::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+.aitrTable::-webkit-scrollbar-thumb {
+  @apply bg-blue-600;
+  border-radius: 10px;
+}

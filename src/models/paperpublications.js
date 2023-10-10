@@ -22,6 +22,10 @@ const paperPublications = new mongoose.Schema({
         type: String,
         required: [true, "Please Enter link."],
     },
+    researchEvent: {
+        type: Object,
+        required: [true, "Please Enter Research Events."],
+    },
     createdAt: {
         type: Date,
         default: Date.now()
